@@ -20,9 +20,19 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("ERROR: Invalid number of arguments: " + args.length + ". Expected 1 ... *");
+            System.exit(-1);
+        }
         double[] input = new double[args.length];
         for (int i = 0; i < input.length; i++) {
-            input[i] = Double.parseDouble(args[i]);
+            try {
+                input[i] = Double.parseDouble(args[i]);
+            } catch (NumberFormatException e) {
+                System.out.println("ERROR: Invalid input format! Cannot parse input.");
+                System.out.println("       Please input a set of numbers, separating them using a single space.");
+                System.exit(-1);
+            }
         }
 
         List<AbstractStatisticalValueWorker> workers = new ArrayList<>();
